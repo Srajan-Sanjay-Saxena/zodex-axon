@@ -392,4 +392,4 @@ app.delete(
 
 ## License
 
-ISC
+MIT
