@@ -1,12 +1,45 @@
 {
   "name": "zodex-axon",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "0.1.0",
+  "description": "Type-safe request validation middleware for Express + Zod with branded types",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./errors": {
+      "import": "./dist/error/index.js",
+      "types": "./dist/error/index.d.ts"
+    },
+    "./middleware": {
+      "import": "./dist/core/engine.core.js",
+      "types": "./dist/core/engine.core.d.ts"
+    },
+    "./types": {
+      "import": "./dist/helper/types.helper.js",
+      "types": "./dist/helper/types.helper.d.ts"
+    }
   },
-  "keywords": [],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:tsc": "tsc --noEmit",
+    "test:types": "tsc --noEmit -p tests/tsconfig.json",
+    "prepublishOnly": "pnpm build"
+  },
+  "keywords": [
+    "zod",
+    "validation",
+    "typesafe",
+    "express",
+    "middleware",
+    "branded-types"
+  ],
   "author": "",
   "license": "ISC",
   "devEngines": {
@@ -16,10 +49,18 @@
       "onFail": "download"
     }
   },
-  "type": "module",
-  "dependencies": {
+  "peerDependencies": {
+    "express": "^4.0.0 || ^5.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
     "@types/express": "^5.0.6",
-    "zod": "^4.4.3",
+    "express": "^5.1.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.8.0",
+    "zod": "^4.4.3"
+  },
+  "dependencies": {
     "zod-validation-error": "^5.0.0"
   }
 }
