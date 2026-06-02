@@ -35,6 +35,9 @@ coverage/
 npm-debug.log*
 pnpm-debug.log*
 
+# Internal docs
+internal.md
+
 # Lock files (keep pnpm-lock.yaml)
 package-lock.json
 yarn.lock
