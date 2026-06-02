@@ -1,5 +1,7 @@
 # zodex-axon
 
+> **World's first Express middleware that makes unvalidated request access a compile-time error.**
+
 Type-safe request validation middleware for Express + Zod with branded types.
 
 ## Why?
@@ -306,6 +308,54 @@ app.post(
   rateLimiter,              // throttle
   RequestGuardMiddleware<{ body: CreateUser }>({ body: createUserSchema }), // validate
   handler,                  // your logic
+);
+```
+
+### Type Accumulation with Custom Request
+
+The second generic `U` in `VerifiedRequest` accepts an augmented Request type. Use it to carry types from earlier middleware:
+
+```ts
+// Define your authenticated request (from auth middleware)
+interface AuthenticatedRequest extends Request {
+  user: { id: string; role: string };
+}
+
+const userSchema = z.object({ name: z.string() });
+type User = z.infer<typeof userSchema>;
+
+app.post(
+  "/users",
+  authMiddleware, // attaches req.user at runtime
+  RequestGuardMiddleware<{ body: User }>({ body: userSchema }),
+  (req: VerifiedRequest<{ body: User }, AuthenticatedRequest>, res) => {
+    req.user;          // ✅ from AuthenticatedRequest
+    req.validatedData; // ✅ branded, validated
+    req.body;          // ❌ TypeScript error — stripped
+  }
+);
+```
+
+This works because `VerifiedRequest<TConfig, U>` applies `Omit` and branding on top of whatever `U` you pass — so all properties from your custom request type are preserved.
+
+```ts
+// Admin request with permissions
+interface AdminRequest extends Request {
+  user: { id: string; role: "admin" };
+  permissions: string[];
+}
+
+app.delete(
+  "/users/:id",
+  authMiddleware,
+  requireAdmin,
+  RequestGuardMiddleware<{ params: { id: string } }>({ params: idSchema }),
+  (req: VerifiedRequest<{ params: { id: string } }, AdminRequest>, res) => {
+    req.user;            // ✅ { id: string; role: "admin" }
+    req.permissions;     // ✅ string[]
+    req.validatedParams; // ✅ { id: string } (branded)
+    req.params;          // ❌ stripped
+  }
 );
 ```
 
