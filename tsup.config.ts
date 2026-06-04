@@ -2,10 +2,9 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: [
-    "src/index.ts",
+    "src/core/index.ts",
     "src/error/index.ts",
-    "src/core/engine.core.ts",
-    "src/helper/types.helper.ts",
+    "src/utils/index.ts",
     "src/res/response.master.controller.ts",
   ],
   format: ["esm"],

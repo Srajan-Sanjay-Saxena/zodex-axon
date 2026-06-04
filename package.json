@@ -4,29 +4,23 @@
   "description": "Type-safe request validation middleware for Express + Zod with branded types",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+    "./core": {
+      "import": "./dist/core/index.js",
+      "types": "./dist/core/index.d.ts"
     },
     "./errors": {
       "import": "./dist/error/index.js",
       "types": "./dist/error/index.d.ts"
     },
-    "./middleware": {
-      "import": "./dist/core/engine.core.js",
-      "types": "./dist/core/engine.core.d.ts"
-    },
-    "./types": {
-      "import": "./dist/helper/types.helper.js",
-      "types": "./dist/helper/types.helper.d.ts"
-    },
     "./responses": {
       "import": "./dist/res/response.master.controller.js",
       "types": "./dist/res/response.master.controller.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
     }
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
