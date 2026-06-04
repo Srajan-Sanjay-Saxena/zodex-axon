@@ -1,6 +1,6 @@
 {
   "name": "zodex-axon",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Type-safe request validation middleware for Express + Zod with branded types",
   "type": "module",
   "exports": {
@@ -19,6 +19,10 @@
     "./types": {
       "import": "./dist/helper/types.helper.js",
       "types": "./dist/helper/types.helper.d.ts"
+    },
+    "./responses": {
+      "import": "./dist/res/response.master.controller.js",
+      "types": "./dist/res/response.master.controller.d.ts"
     }
   },
   "main": "./dist/index.js",

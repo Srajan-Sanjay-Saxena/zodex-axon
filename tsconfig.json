@@ -19,7 +19,8 @@
       "@core/*": ["./src/core/*"],
       "@error/*": ["./src/error/*"],
       "@utils/*": ["./src/utils/*"],
-      "@helper/*": ["./src/helper/*"]
+      "@helper/*": ["./src/helper/*"],
+      "@res/*": ["./src/res/*"]
     }
   },
   "include": ["src/**/*.ts"],

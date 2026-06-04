@@ -6,6 +6,7 @@ export default defineConfig({
     "src/error/index.ts",
     "src/core/engine.core.ts",
     "src/helper/types.helper.ts",
+    "src/res/response.master.controller.ts",
   ],
   format: ["esm"],
   dts: true,
@@ -19,6 +20,7 @@ export default defineConfig({
       "@error": "./src/error",
       "@utils": "./src/utils",
       "@helper": "./src/helper",
+      "@res": "./src/res",
     };
   },
 });
