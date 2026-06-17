@@ -27,10 +27,21 @@ export function MakeObjectTypeSafeEngine<TSchema>(
   }
   return {
     success: true,
-    data: result.data as ValidDataBrand<z.infer<TSchema>>,
+    data: result.data as ValidDataBrand<TSchema>,
     error: null,
   };
 }
+
+const result = MakeObjectTypeSafeEngine(
+  z.object({
+    name: z.string(),
+    age: z.number(),
+  }),
+  {
+    name: "John",
+    age: 30,
+  },
+);
 
 export const RequestGuardMiddleware = <TConfig extends VerifiedRequestConfig>(
   schemas: SchemaConfig<TConfig>,
