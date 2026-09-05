@@ -17,9 +17,9 @@ type RequireAtLeastOne<TSchema extends VerifiedRequestConfig> =
         : never;
 
 type StrippedKeys<TConfig extends VerifiedRequestConfig> =
-  (TConfig["body"] extends Record<string, any> ? "body" : never) |
-  (TConfig["params"] extends Record<string, any> ? "params" : never) |
-  (TConfig["query"] extends Record<string, any> ? "query" : never);
+  | (TConfig["body"] extends Record<string, any> ? "body" : never)
+  | (TConfig["params"] extends Record<string, any> ? "params" : never)
+  | (TConfig["query"] extends Record<string, any> ? "query" : never);
 
 type VerifiedRequest<
   TConfig extends VerifiedRequestConfig,
